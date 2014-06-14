@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include <memory>  // smart pointers - using shared_ptr 
 
 void Node::insert(int value){
 	if (this->value == value){
@@ -10,13 +11,13 @@ void Node::insert(int value){
 		if (this->left){
 			this->left->insert(value);
 		}else{
-			this->left = new Node(value);
+			this->left = std::shared_ptr<Node> ( new Node(value) );
 		}
 	}else if (this->value < value){
 		if (this->right){
 			this->right->insert(value);
 		}else{
-			this->right = new Node(value);
+			this->right = std::shared_ptr<Node> ( new Node(value) );
 		}
 	}	
 }

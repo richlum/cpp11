@@ -3,7 +3,8 @@
 
 #include <string>
 #include <cstdint>
-
+#include <memory>  // smart pointers - using shared_ptr 
+// strongly typed enum
 enum class Order  { PREORDER, INORDER, POSTORDER };
 
 
@@ -12,12 +13,14 @@ enum class Order  { PREORDER, INORDER, POSTORDER };
 class Node{
 	int value;
 	int qty;
-	Node* left;
-	Node* right;
+	//Node* left;
+	//Node* right;
+	std::shared_ptr<Node> left;
+	std::shared_ptr<Node> right;
 	int depth;
 	int column;
 	
-public:
+public:                            //  nullptr is t_nullptr, not int
 	Node(int v):value(v),qty(1),left(nullptr),right(nullptr),
 				depth(0),column(0) {};
 	void insert(int value);

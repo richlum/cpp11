@@ -1,10 +1,10 @@
-
 #include "node.hpp"
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
 #include <time.h>
 #include <string>
+#include <memory>
 
 #define UPB 100
 
@@ -26,7 +26,8 @@ int main(int argc, char** argv)
 	
 	srand(time(NULL));	
 
-	Node* root = new Node(13);
+	//Node* root = new Node(13);
+	std::shared_ptr<Node> root = std::shared_ptr<Node>( new Node(13) );
 	root->insert(11);
 	root->insert(100);
 	root->insert(44);

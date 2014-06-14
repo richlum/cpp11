@@ -5,12 +5,12 @@
 #include <cstdint>
 #include <memory>  // smart pointers - using shared_ptr 
 // strongly typed enum
-enum class Order  { PREORDER, INORDER, POSTORDER };
+enum class Order  { PREORDER, INORDER, POSTORDER, BREADTH };
 
 
 
-
-class Node{
+           // for passing of share_ptr for 'this' object
+class Node: public std::enable_shared_from_this<Node> {
 	int value;
 	int qty;
 	//Node* left;
@@ -40,7 +40,7 @@ public:                            //  nullptr is t_nullptr, not int
 	
 private:
 	std::string describe(bool showdepth=false);
-	void calcDepth(int depth, int column);
+	void calcDepth(int depth=1, int column=0);
 
 };
 #endif

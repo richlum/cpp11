@@ -3,6 +3,11 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>  // smart pointers - using shared_ptr 
+#include <deque>
+
+
+#define COFSET 2
+
 
 void Node::insert(int value){
 	if (this->value == value){
@@ -35,6 +40,23 @@ std::string Node::describe(bool showdepth){
 }
 
 void Node::visit(Order ord){
+	if (ord == Order::BREADTH){
+		calcDepth();
+		std::deque< std::shared_ptr<Node> > q;
+		q.push_back( shared_from_this() );
+		while (!q.empty()){
+			std::shared_ptr<Node> anode = q.front();
+			q.pop_front();
+			std::cout <<  anode->describe(true) << std::endl;
+			if (anode->left)
+				q.push_back(anode->left);
+			if (anode->right)
+				q.push_back(anode->right);
+
+		}
+		return;		
+		
+	}
 	if (ord == Order::PREORDER)
 		std::cout << describe() << std::endl;
 	if (this->left)
@@ -48,4 +70,16 @@ void Node::visit(Order ord){
 }
 
 
+void Node::calcDepth(int depth, int column){
+	this->depth = depth;
+	this->column = column;
+	if (this->left){
+		this->left->calcDepth(depth + 1, column - COFSET);
+	}
+	if (this->right){
+		this->right->calcDepth(depth + 1, column + COFSET);
+	}
+
+
+}
 

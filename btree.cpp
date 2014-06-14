@@ -5,6 +5,7 @@
 #include <time.h>
 #include <string>
 #include <memory>
+#include <iomanip>
 
 #define UPB 100
 
@@ -36,9 +37,26 @@ int main(int argc, char** argv)
 	for (int i=0; i< qty; i++) {
 		root->insert(getrand());
 	}
-
+	
+	std::cout <<  std::setw(32) << std::setfill('=') << " INORDER/DEFAULT " ;
+	std::cout <<  std::endl ;
+	
 	root->visit();
 
+	std::cout <<  std::setw(32) << std::setfill('=') << " PREORDER " ;
+	std::cout <<  std::endl ;
+
+	root->visit(Order::PREORDER);
+
+	std::cout <<  std::setw(32) << std::setfill('=') << " POSTORDER " ;
+	std::cout <<  std::endl ;
+
+	root->visit(Order::POSTORDER);
+
+	std::cout <<  std::setw(32) << std::setfill('=') << " BREADTH " ;
+	std::cout <<  std::endl ;
+
+	root->visit(Order::BREADTH);
 
 
 }

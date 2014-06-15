@@ -7,7 +7,7 @@
 #include <memory>
 #include <iomanip>
 
-#define UPB 100
+#define UPB 10
 
 int getrand(){
 	return (rand() % UPB) + 1;
@@ -41,22 +41,22 @@ int main(int argc, char** argv)
 	std::cout <<  std::setw(32) << std::setfill('=') << " INORDER/DEFAULT " ;
 	std::cout <<  std::endl ;
 	
-	root->visit();
+	std::cout <<  "Total: " << root->visit() << std::endl;
 
 	std::cout <<  std::setw(32) << std::setfill('=') << " PREORDER " ;
 	std::cout <<  std::endl ;
 
-	root->visit(Order::PREORDER);
+	std::cout <<  "Total: " << root->visit(Order::PREORDER) << std::endl;
 
 	std::cout <<  std::setw(32) << std::setfill('=') << " POSTORDER " ;
 	std::cout <<  std::endl ;
 
-	root->visit(Order::POSTORDER);
+	std::cout <<  "Total: " << root->visit(Order::POSTORDER) << std::endl;
 
 	std::cout <<  std::setw(32) << std::setfill('=') << " BREADTH " ;
 	std::cout <<  std::endl ;
 
-	root->visit(Order::BREADTH);
+	std::cout <<  "Total: " << root->visit(Order::BREADTH) << std::endl;
 
 
 }

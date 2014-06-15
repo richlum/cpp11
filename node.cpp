@@ -39,7 +39,8 @@ std::string Node::describe(bool showdepth){
 	return std::string(ss.str());
 }
 
-void Node::visit(Order ord){
+int Node::visit(Order ord){
+	int total = 0;
 	if (ord == Order::BREADTH){
 		calcDepth();
 		std::deque< std::shared_ptr<Node> > q;
@@ -48,25 +49,33 @@ void Node::visit(Order ord){
 			std::shared_ptr<Node> anode = q.front();
 			q.pop_front();
 			std::cout <<  anode->describe(true) << std::endl;
+			total += anode->getqty();
 			if (anode->left)
 				q.push_back(anode->left);
 			if (anode->right)
 				q.push_back(anode->right);
 
 		}
-		return;		
+		return total;		
 		
 	}
-	if (ord == Order::PREORDER)
+	if (ord == Order::PREORDER){
 		std::cout << describe() << std::endl;
-	if (this->left)
-		this->left->visit(ord);
-	if (ord == Order::INORDER)
+	}
+	if (this->left){
+		total += this->left->visit(ord);
+	}
+	if (ord == Order::INORDER){
 		std::cout << describe() << std::endl;
-	if (this->right)
-		this->right->visit(ord);
-	if (ord == Order::POSTORDER)
+	}
+	if (this->right){
+		total += this->right->visit(ord);
+	}
+	if (ord == Order::POSTORDER){
 		std::cout << describe() << std::endl;
+	}
+	total += this->getqty();
+	return total;
 }
 
 

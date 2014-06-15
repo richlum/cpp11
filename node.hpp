@@ -24,7 +24,7 @@ public:                            //  nullptr is t_nullptr, not int
 	Node(int v):value(v),qty(1),left(nullptr),right(nullptr),
 				depth(0),column(0) {};
 	void insert(int value);
-	void visit(Order ord=Order::INORDER);
+	int visit(Order ord=Order::INORDER);
 	int getvalue(){
 		return value;
 	}

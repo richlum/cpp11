@@ -29,19 +29,25 @@ private:
 };
 
 
-int main(int argc, char** argv) {
-	std::vector<std::shared_ptr<Shape>> shapes; // = new std::vector<Shape*>();
-	std::shared_ptr<Shape> s1 = std::make_shared<Shape>( Shape (1,1) );
-	//shapes.push_back( std::make_shared<Shape>(new Shape (1,1) ));
-/*	shapes.push_back( new Shape (2,3) );
-	shapes.push_back( new Shape (3,4) );
-	shapes.push_back( new Shape (4,5) );
-*//*
-	int i = 0;
-	for (auto s : shapes) {
-		std::cout << ++i << " : " << s->whatami() << std::endl;
+
+std::vector<std::shared_ptr<Shape*>>* populate(int qty){
+	std::vector<std::shared_ptr<Shape*>>* shapes = new std::vector<std::shared_ptr<Shape*>>(); // = new std::vector<Shape*>();
+	//std::shared_ptr<Shape> s1 = std::make_shared<Shape>( Shape (1,1) );
+	for (int i = 0;i<qty;i++){
+		shapes->push_back( std::make_shared<Shape*>( new Shape (i,i+1) ));
 	}
-	*/
-	std::cout << s1->whatami() << std::endl;
+	return shapes;
+}
+
+
+int main(int argc, char** argv) {
+
+	std::vector<std::shared_ptr<Shape*>>* shapes = populate(5); 
+	int i = 0;
+	for (auto s : *shapes) {
+		std::cout << ++i << " : " << (*s)->whatami() << std::endl;
+	}
+	
+	//std::cout << s1->whatami() << std::endl;
 }
 	

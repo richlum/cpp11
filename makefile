@@ -1,7 +1,14 @@
 CXXFLAGS=-g -Wall -std=c++11
 CXX=g++
 
-build: btree
+SRC=$(wildcard *.cpp)
+TRG=$(patsubst %.cpp,%,$(SRC))
+
+list:
+	echo $(SRC)
+	echo $(TRG)
+
+build: $(TRG)
 
 node.o: node.cpp node.hpp
 	$(CXX) $(CXXFLAGS) -c $<
@@ -11,4 +18,4 @@ btree: btree.cpp node.o
 
 
 clean:
-	rm *.exe *.o
+	rm *.exe $(TRG) *.o

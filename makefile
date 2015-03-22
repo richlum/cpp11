@@ -1,4 +1,4 @@
-CXXFLAGS=-g -Wall -std=c++11
+CXXFLAGS=-g -Wall -std=c++1y
 CXX=g++
 
 SRC=$(wildcard *.cpp)

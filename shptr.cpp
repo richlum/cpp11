@@ -53,20 +53,28 @@ shapevector* move(int x , int y, shapevector* sv) {
 }
 
 void empty (shapevector* sv){
+
 	for (std::shared_ptr<Shape*> s : *sv) {
-		s.reset();  // note reset is a shared_ptr method  
+		//delete *s;
+		*s = nullptr;
+		//s.reset();  // note reset is a shared_ptr method  
 	}
 		
 }
+void show(shapevector* sv) {
+	int i = 0;
+	for (auto s : *sv) {
+		std::cout << ++i << " : " << (*s)->whatami() << std::endl;
+	}
+}
+
 int main(int argc, char** argv) {
 
 	shapevector* shapes = populate(5);
 	shapes = move(3,2,shapes); 
-	int i = 0;
-	for (auto s : *shapes) {
-		std::cout << ++i << " : " << (*s)->whatami() << std::endl;
-	}
-	
+	std::shared_ptr<Shape*>  shape3 = (*shapes)[3];
+	show (shapes);	
+	empty (shapes);
 	//std::cout << s1->whatami() << std::endl;
+	std::cout << (*shape3)->whatami();
 }
-	

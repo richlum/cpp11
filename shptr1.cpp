@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <memory>  //shared_ptr
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -85,14 +87,26 @@ void wmovexy(int x, int y, shvectorwk* sv) {
 }
 
 void empty (shvectorsp* sv){
-
-	for (auto  s : *sv) {
-		s.reset();
+	std::cout << "--- emptying ---" << std::endl;
+	//for (auto  s : *sv) {
+	//	s.reset();
+	//}
+	std::cout << (*sv)[0]->whatami() << std::endl;
+	std::cout << (*sv)[1]->whatami() << std::endl;
+	std::cout << (*sv)[2]->whatami() << std::endl;
+	std::cout << (*sv)[3]->whatami() << std::endl;
+	std::cout << (*sv)[4]->whatami() << std::endl;
+	std::cout << "sv->size = " << sv->size() << std::endl;
+	for (int i=0;i<sv->size();i++) {
+		auto sh = sv->back();
+		std::cout << i << " emptying " << sh->whatami() << std::endl;
+		sv->pop_back();
 	}
 		
 }
 void show(shvectorsp* sv) {
 	int i = 0;
+	std::cout << "----" << std::endl;
 	for (auto s : *sv) {
 		std::cout << ++i << " : " << s->whatami() << std::endl;
 	}
@@ -106,12 +120,24 @@ shvectorwk* getWkShVect (shvectorsp* ssv) {
 	return wsv;
 }
 
-
+void drawline(int x) {
+	for (int i=0;i<x;i++) {
+		std::cout << "=";
+	}
+	std::cout << std::endl;
+}
 
 int main(int argc, char** argv) {
 
 	shvectorsp* shapes = populate(5);
 	dmovexy(3,2,shapes); 
 	show (shapes);	
+	smovexy(1,2,shapes); 
+	show (shapes);	
+	shvectorwk* wshapes = getWkShVect(shapes);
+	wmovexy(1,2,wshapes);
+	show (shapes);	
 	empty (shapes);
+	drawline(55);
+	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 }
